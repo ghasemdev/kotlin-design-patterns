@@ -16,7 +16,7 @@ Pattern design solutions are usually using object-oriented.
 </p>
 
 ### Type of design pattern
-#### ⚫ Creational Design Pattern
+<a href="#C1">⚫ Creational Design Pattern</a>
 <P>
 1. Factory Pattern <br>
 2. Abstract Factory Pattern <br>
@@ -25,7 +25,7 @@ Pattern design solutions are usually using object-oriented.
 5. Builder Pattern.
 </P>
 
-#### ⚫ Structural Design Pattern
+<a href="#C2">⚫ Structural Design Pattern</a>
 <P>  
 1. Adapter Pattern <br>
 2. Bridge Pattern <br>
@@ -36,7 +36,7 @@ Pattern design solutions are usually using object-oriented.
 7. Proxy Pattern <br>
 </P>
 
-#### ⚫ Behavioral Design Pattern
+<a href="#C3">⚫ Behavioral Design Pattern</a>
 <p>
 &nbsp;&nbsp;1. Chain Of Responsibility Pattern <br>
 &nbsp;&nbsp;2. Command Pattern <br>
@@ -51,3 +51,8 @@ Pattern design solutions are usually using object-oriented.
 11. Visitor Pattern
 </p>
 
+<h3 id="C1">Creational Design Pattern</h3>
+
+<h3 id="C2">Structural Design Pattern</h3>
+
+<h3 id="C3">Behavioral Design Pattern</h3>
