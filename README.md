@@ -62,18 +62,75 @@ But for many it may be very easy to build an object and just by new we create an
 But hard code is not a good solution Because we sometimes change the identity of a class in our code, and in such cases we have to use the Creational Design pattern.
 </p>
 
-<h4 id="C1">Factory Pattern</h4>
+<h4 id="C1"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/src/main/creational/FactoryPattern.kt">Factory Pattern</a></h4>
 <hr><p>
 The factory pattern is used to replace class constructors, 
 abstracting the process of object generation so that the type of the object instantiated can be determined at run-time.
 </p>
 
-<img src="https://i.stack.imgur.com/sWv1u.png" alt="factory"><br>
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/FactoryPattern.png?raw=true" alt="factory"><br>
 
 <p>
 <b>Example</b><br>
 </p>
 
+    interface Shape {
+        fun draw(): String
+    }
+
+    class Circle : Shape {
+        override fun draw(): String {
+            return "Shape : Circle"
+        }
+    }
+
+    class Rectangle : Shape {
+        override fun draw(): String {
+            return "Shape : Rectangle"
+        }
+    }
+
+    class Square : Shape {
+        override fun draw(): String {
+            return "Shape : Square"
+        }
+    }
+
+    object ShapeFactory { // Factory create shapes
+        enum class ShapeType {
+            CIRCLE, RECTANGLE, SQUARE
+        }
+        
+        fun createShape(type: ShapeType): Shape {
+            return when (type) {
+                ShapeType.CIRCLE -> Circle()
+                ShapeType.RECTANGLE -> Rectangle()
+                ShapeType.SQUARE -> Square()
+            }
+        }
+    }
+
+<p>
+<b>Usage</b><br>
+</p>
+
+    val circle = ShapeFactory.createShape(ShapeFactory.ShapeType.CIRCLE)
+    println(circle.draw())
+
+    val rectangle = ShapeFactory.createShape(ShapeFactory.ShapeType.RECTANGLE)
+    println(rectangle.draw())
+
+    val square = ShapeFactory.createShape(ShapeFactory.ShapeType.SQUARE)
+    println(square.draw())
+
+<p>
+<b>Output</b><br>
+</p>
+
+    Shape : Circle
+    Shape : Rectangle
+    Shape : Square
+    
 <h4 id="C2">Abstract Factory Pattern</h4>
 <hr><p>
 
