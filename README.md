@@ -62,7 +62,7 @@ But for many it may be very easy to build an object and just by new we create an
 But hard code is not a good solution Because we sometimes change the identity of a class in our code, and in such cases we have to use the Creational Design pattern.
 </p>
 
-<h4 id="C1"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/src/main/creational/FactoryPattern.kt">Factory Pattern</a></h4>
+<h4 id="C1"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/factory">Factory Pattern</a></h4>
 <hr><p>
 The factory pattern is used to replace class constructors, 
 abstracting the process of object generation so that the type of the object instantiated can be determined at run-time.
@@ -131,13 +131,13 @@ abstracting the process of object generation so that the type of the object inst
     Shape : Rectangle
     Shape : Square
     
-<h4 id="C2"><a href="">Abstract Factory Pattern</a></h4>
+<h4 id="C2"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/abstractfactory">Abstract Factory Pattern</a></h4>
 <hr><p>
 The abstract factory pattern is used to provide a client with a set of related or dependant objects. 
 The "family" of objects created by the factory are determined at run-time.    
 </p>
 
-<img src="" alt="abstarct factory" width="400" height="500"><br>
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/AbstractFactoryPattern.png?raw=true" alt="abstarct factory" width="400" height="500"><br>
 
 <p>
 <b>Example</b><br>
