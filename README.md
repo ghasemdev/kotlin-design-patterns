@@ -137,7 +137,7 @@ The abstract factory pattern is used to provide a client with a set of related o
 The "family" of objects created by the factory are determined at run-time.    
 </p>
 
-<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/AbstractFactoryPattern.png?raw=true" alt="abstarct factory" width="400" height="500"><br>
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/AbstractFactoryPattern.png?raw=true" alt="abstarct factory" width="500" height="500"><br>
 
 <p>
 <b>Example</b><br>
