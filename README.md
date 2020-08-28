@@ -68,7 +68,7 @@ The factory pattern is used to replace class constructors,
 abstracting the process of object generation so that the type of the object instantiated can be determined at run-time.
 </p>
 
-<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/FactoryPattern.png?raw=true" alt="factory"><br>
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/FactoryPattern.png?raw=true" alt="factory" width="400" height="400"><br>
 
 <p>
 <b>Example</b><br>
