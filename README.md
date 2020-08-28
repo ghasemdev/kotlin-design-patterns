@@ -131,10 +131,129 @@ abstracting the process of object generation so that the type of the object inst
     Shape : Rectangle
     Shape : Square
     
-<h4 id="C2">Abstract Factory Pattern</h4>
+<h4 id="C2"><a href="">Abstract Factory Pattern</a></h4>
 <hr><p>
-
+The abstract factory pattern is used to provide a client with a set of related or dependant objects. 
+The "family" of objects created by the factory are determined at run-time.    
 </p>
+
+<img src="" alt="abstarct factory" width="400" height="500"><br>
+
+<p>
+<b>Example</b><br>
+</p>
+
+    interface Shape {
+        fun draw(): String
+    }
+
+    class Circle : Shape {
+        override fun draw(): String {
+            return "Shape : Circle"
+        }
+    }
+
+    class Rectangle : Shape {
+        override fun draw(): String {
+            return "Shape : Rectangle"
+        }
+    }
+
+    class Square : Shape {
+        override fun draw(): String {
+            return "Shape : Square"
+        }
+    }
+    
+    interface Color {
+        fun fill(): String
+    }
+    
+    class Blue : Color {
+        override fun fill(): String {
+            return "Color : Blue"
+        }
+    }
+    
+    class Green : Color {
+        override fun fill(): String {
+            return "Color : Green"
+        }
+    }
+    
+    class Red : Color {
+        override fun fill(): String {
+            return "Color : Red"
+        }
+    }
+    
+    class ShapeFactory : AbstractFactory() { // Factory create shapes
+        enum class ShapeType {
+            CIRCLE, RECTANGLE, SQUARE
+        }
+    
+        override fun getColor(type: ColorFactory.ColorType): Color? {
+            return null
+        }
+    
+        override fun getShape(type: ShapeType): Shape {
+            return when (type) {
+                ShapeType.CIRCLE -> Circle()
+                ShapeType.RECTANGLE -> Rectangle()
+                ShapeType.SQUARE -> Square()
+            }
+        }
+    }
+    
+    class ColorFactory : AbstractFactory() { // Factory create color
+        enum class ColorType {
+            BLUE, GREEN, RED
+        }
+    
+        override fun getColor(type: ColorType): Color {
+            return when (type) {
+                ColorType.BLUE -> Blue()
+                ColorType.GREEN -> Green()
+                ColorType.RED -> Red()
+            }
+        }
+    
+        override fun getShape(type: ShapeFactory.ShapeType): Shape? {
+            return null
+        }
+    }    
+    
+    abstract class AbstractFactory {
+        abstract fun getColor(type: ColorFactory.ColorType): Color?
+        abstract fun getShape(type: ShapeFactory.ShapeType): Shape?
+    
+        companion object {
+            inline fun <reified T : AbstractFactory> createFactory(): AbstractFactory = when (T::class) {
+                ShapeFactory::class -> ShapeFactory()
+                ColorFactory::class -> ColorFactory()
+                else -> throw IllegalArgumentException()
+            }
+        }
+    }
+
+<p>
+<b>Usage</b><br>
+</p>
+
+    var factory = AbstractFactory.createFactory<ColorFactory>()
+    val blue = factory.getColor(ColorFactory.ColorType.BLUE)!!
+    println(blue.fill())   
+    
+    factory = AbstractFactory.createFactory<ShapeFactory>()
+    val circle = factory.getShape(ShapeFactory.ShapeType.CIRCLE)!!
+    println(circle.draw()) 
+    
+<p>
+<b>Output</b><br>
+</p>
+
+    Color : Blue
+    Shape : Circle
 
 <h4 id="C3">Singleton Pattern</h4>
 <hr><p>
