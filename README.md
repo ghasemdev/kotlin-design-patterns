@@ -257,10 +257,38 @@ The "family" of objects created by the factory are determined at run-time.
 
 <h4 id="C3">Singleton Pattern</h4>
 <hr><p>
-
+The singleton pattern ensures that only one object of a particular class is ever created. 
+All further references to objects of the singleton class refer to the same underlying instance.
 </p>
 
-<h4 id="C4">Prototype Pattern</h4>
+<p>
+<b>Example</b><br>
+</p>
+
+    object DataBase {
+        init {
+            println("Initialize : $this")
+        }
+    
+        fun open() = "Open data base : $this"
+    }
+    
+<p>
+<b>Usage</b><br>
+</p>
+
+    DataBase.open()
+    DataBase.open()
+    
+<p>
+<b>Output</b><br>
+</p>
+
+    Initialize : singleton.DataBase@3a5ed7a6
+    Open data base : singleton.DataBase@3a5ed7a6
+    Open data base : singleton.DataBase@3a5ed7a6
+
+<h4 id="C4"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/singleton">Prototype Pattern</a></h4>
 <hr><p>
 
 </p>
