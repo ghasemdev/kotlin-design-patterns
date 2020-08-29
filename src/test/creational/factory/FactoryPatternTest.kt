@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 class FactoryPatternTest {
     @Test
-    fun shapeFactory() {
+    fun factory() {
         val circle = ShapeFactory.getShape(ShapeFactory.ShapeType.CIRCLE)
         assertEquals("Shape : Circle", circle.draw())
 
