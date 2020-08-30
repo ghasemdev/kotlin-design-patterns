@@ -66,7 +66,7 @@ But hard code is not a good solution Because we sometimes change the identity of
 <hr><p>
 The factory pattern is used to replace class constructors, 
 abstracting the process of object generation so that the type of the object instantiated can be determined at run-time.
-We can also use sealed class :)
+we can also use sealed class :)
 </p>
 
 <img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/FactoryPattern.png?raw=true" alt="factory" width="400" height="400"><br>
@@ -293,10 +293,10 @@ All further references to objects of the singleton class refer to the same under
 <hr><p>
 The purpose of a pattern prototype is that we do not create different objects of the same class, 
 simplify an object we have, and do not pay to build a new object. 
-We can also implements Cloneable class or use <code>my_object.copy()</code> in Kotlin. 
+we can also implements Cloneable class or use <code>my_object.copy()</code> in Kotlin. 
 </p>
 
-<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/prototype.png?raw=true" alt="prototype" width="400" height="400"><br>
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/prototype.png?raw=true" alt="prototype" width="300" height="300"><br>
 
 <p>
 <b>Example</b><br>
