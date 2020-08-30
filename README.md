@@ -21,37 +21,37 @@ Pattern design solutions are usually using object-oriented.
 <h4><a href="#T1">&#9679; Creational Design Pattern</a></h4>
 <P>
 
-<a href="#C1">1. Factory Pattern </a><br>
-<a href="#C2">2. Abstract Factory Pattern </a><br>
-<a href="#C3">3. Singleton Pattern </a><br>
-<a href="#C4">4. Prototype Pattern </a><br>
-<a href="#C5">5. Builder Pattern</a>
+<a href="#C1">&nbsp;&nbsp;1. Factory Pattern </a><br>
+<a href="#C2">&nbsp;&nbsp;2. Abstract Factory Pattern </a><br>
+<a href="#C3">&nbsp;&nbsp;3. Singleton Pattern </a><br>
+<a href="#C4">&nbsp;&nbsp;4. Prototype Pattern </a><br>
+<a href="#C5">&nbsp;&nbsp;5. Builder Pattern</a>
 </P>
 
 <h4><a href="#T2">&#9679; Structural Design Pattern</a></h4>
 <P>  
-1. Adapter Pattern <br>
-2. Bridge Pattern <br>
-3. Composite Pattern <br>
-4. Decorator Pattern <br>
-5. Facade Pattern <br>
-6. Flyweight Pattern <br>
-7. Proxy Pattern <br>
+&nbsp;&nbsp;6. Adapter Pattern <br>
+&nbsp;&nbsp;7. Bridge Pattern <br>
+&nbsp;&nbsp;8. Composite Pattern <br>
+&nbsp;&nbsp;9. Decorator Pattern <br>
+10. Facade Pattern <br>
+11. Flyweight Pattern <br>
+12. Proxy Pattern <br>
 </P>
 
 <h4><a href="#T3">&#9679; Behavioral Design Pattern</a></h4>
 <p>
-&nbsp;&nbsp;1. Chain Of Responsibility Pattern <br>
-&nbsp;&nbsp;2. Command Pattern <br>
-&nbsp;&nbsp;3. Interpreter Pattern <br>
-&nbsp;&nbsp;4. Iterator Pattern <br>
-&nbsp;&nbsp;5. Mediator Pattern <br>
-&nbsp;&nbsp;6. Memento Pattern <br>
-&nbsp;&nbsp;7. Observer Pattern <br>
-&nbsp;&nbsp;8. State Pattern <br> 
-&nbsp;&nbsp;9. Strategy Pattern <br>
-10. Template Pattern <br> 
-11. Visitor Pattern
+13. Chain Of Responsibility Pattern <br>
+14. Command Pattern <br>
+15. Interpreter Pattern <br>
+16. Iterator Pattern <br>
+17. Mediator Pattern <br>
+18. Memento Pattern <br>
+19. Observer Pattern <br>
+20. State Pattern <br> 
+21. Strategy Pattern <br>
+22. Template Pattern <br> 
+23. Visitor Pattern
 </p>
 
 <h3 id="T1">Creational Design Pattern</h3>
@@ -66,6 +66,7 @@ But hard code is not a good solution Because we sometimes change the identity of
 <hr><p>
 The factory pattern is used to replace class constructors, 
 abstracting the process of object generation so that the type of the object instantiated can be determined at run-time.
+We can also use sealed class :)
 </p>
 
 <img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/FactoryPattern.png?raw=true" alt="factory" width="400" height="400"><br>
@@ -288,10 +289,49 @@ All further references to objects of the singleton class refer to the same under
     Open data base : singleton.DataBase@3a5ed7a6
     Open data base : singleton.DataBase@3a5ed7a6
 
-<h4 id="C4">Prototype Pattern</h4>
+<h4 id="C4"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/prototype">Prototype Pattern</a></h4>
 <hr><p>
-
+The purpose of a pattern prototype is that we do not create different objects of the same class, 
+simplify an object we have, and do not pay to build a new object. 
+We can also implements Cloneable class or use <code>my_object.copy()</code> in Kotlin. 
 </p>
+
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/prototype.png?raw=true" alt="prototype" width="400" height="400"><br>
+
+<p>
+<b>Example</b><br>
+</p>
+
+    interface Prototype {
+        fun getClone(): Prototype
+    }
+    
+    data class EmployeeRecord(
+        var id: Long,
+        var name: String,
+        var designation: String, var salary: Double,
+        var address: String
+    ) : Prototype {
+        override fun getClone(): Prototype {
+            return EmployeeRecord(id, name, designation, salary, address)
+        }
+    }
+    
+<p>
+<b>Usage</b><br>
+</p>
+
+    val e1 = EmployeeRecord(7072, "jack", "software engineer", 1000.0, "Tehran Iran")
+    println(e1)
+    val e2 = e1.getClone()
+    println(e2)
+    
+<p>
+<b>Output</b><br>
+</p>
+
+    EmployeeRecord(id=7072, name=jack, designation=software engineer, salary=1000.0, address=Tehran Iran)
+    EmployeeRecord(id=7072, name=jack, designation=software engineer, salary=1000.0, address=Tehran Iran)
 
 <h4 id="C5">Builder Pattern</h4>
 <hr><p>
