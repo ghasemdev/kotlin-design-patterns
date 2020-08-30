@@ -296,7 +296,7 @@ simplify an object we have, and do not pay to build a new object.
 we can also implements Cloneable class or use <code>my_object.copy()</code> in Kotlin. 
 </p>
 
-<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/prototype.png?raw=true" alt="prototype" width="300" height="300"><br>
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/prototype.png?raw=true" alt="prototype" width="350" height="350"><br>
 
 <p>
 <b>Example</b><br>
