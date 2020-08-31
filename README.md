@@ -333,10 +333,116 @@ we can also implements Cloneable class or use <code>my_object.copy()</code> in K
     EmployeeRecord(id=7072, name=jack, designation=software engineer, salary=1000.0, address=Tehran Iran)
     EmployeeRecord(id=7072, name=jack, designation=software engineer, salary=1000.0, address=Tehran Iran)
 
-<h4 id="C5">Builder Pattern</h4>
+<h4 id="C5"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/builder">Builder Pattern</a></h4>
 <hr><p>
-
+The builder pattern is used to create complex objects with constituent parts that must be created in the same order or using a specific algorithm.
+ An external class controls the construction algorithm.
 </p>
+
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/builder.png?raw=true" alt="prototype" width="300" height="500"><br>
+
+<p>
+<b>Example</b><br>
+</p>
+
+    class Dialog {
+        fun showTitle() = println("showing title")
+    
+        fun setTitle(text: String) = println("setting title text $text")
+    
+        fun setTitleColor(color: Color) = println("setting title color ${colorToHex(color)}")
+    
+        fun showMessage() = println("showing message")
+    
+        fun setMessage(text: String) = println("setting message $text")
+    
+        fun setMessageColor(color: Color) = println("setting message color ${colorToHex(color)}")
+    
+        fun showImage(bitmapBytes: ByteArray) = println("showing image with size ${bitmapBytes.size}")
+    
+        fun show() = println("showing dialog $this")
+    
+        private fun colorToHex(color: Color) = String.format("#%02x%02x%02x", color.red, color.green, color.blue)
+    
+        class Builder(initialize: Builder.() -> Unit) {
+            init {
+                initialize()
+            }
+    
+            private var titleHolder: TextView? = null
+            private var messageHolder: TextView? = null
+            private var imageHolder: File? = null
+    
+            fun title(initialize: TextView.() -> Unit) {
+                titleHolder = TextView().apply { initialize() }
+            }
+    
+            fun message(initialize: TextView.() -> Unit) {
+                messageHolder = TextView().apply { initialize() }
+            }
+    
+            fun image(initialize: () -> File) {
+                imageHolder = initialize()
+            }
+    
+            fun build(): Dialog {
+                return Dialog().apply {
+                    titleHolder?.apply {
+                        setTitle(text)
+                        setTitleColor(color)
+                        showTitle()
+                    }
+    
+                    messageHolder?.apply {
+                        setMessage(text)
+                        setMessageColor(color)
+                        showMessage()
+                    }
+    
+                    imageHolder?.apply {
+                        showImage(readBytes())
+                    }
+                }
+            }
+    
+            class TextView {
+                var text: String = ""
+                var color: Color = Color.BLACK
+            }
+        }
+    }
+    
+<p>
+<b>Usage</b><br>
+</p>
+
+    val dialog = Dialog.Builder {
+        title {
+            text = "Dialog Title"
+        }
+        message {
+            text = "Dialog Message"
+            color = Color.RED
+        }
+        image {
+            File.createTempFile("image", "jpg")
+        }
+    }.build()
+    
+    dialog.show()
+    
+<p>
+<b>Output</b><br>
+</p>
+
+    setting title text Dialog Title
+    setting title color #000000
+    showing title
+    setting message Dialog Message
+    setting message color #ff0000
+    showing message
+    showing image with size 0
+    showing dialog builder.Dialog@9660f4e
 
 <h3 id="T2">Structural Design Pattern</h3>
 <hr>
