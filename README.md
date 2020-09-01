@@ -465,6 +465,11 @@ by wrapping the "adapter" with a class that supports the interface required by t
     
     data class BankDetails(var bankName: String, var accHolderName: String, var accNumber: Long)
     
+    interface CreditCard {
+        fun generateBankDetails(bankName: String, accHolderName: String, accNumber: Long)
+        fun getCreditCard(): String
+    }
+    
     class BankCustomer() : CreditCard {
         private lateinit var bankDetails: BankDetails
     
