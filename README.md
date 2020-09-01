@@ -25,18 +25,19 @@ Pattern design solutions are usually using object-oriented.
 <a href="#C2">&nbsp;&nbsp;2. Abstract Factory Pattern </a><br>
 <a href="#C3">&nbsp;&nbsp;3. Singleton Pattern </a><br>
 <a href="#C4">&nbsp;&nbsp;4. Prototype Pattern </a><br>
-<a href="#C5">&nbsp;&nbsp;5. Builder Pattern</a>
+<a href="#C5">&nbsp;&nbsp;5. Builder Pattern </a>
 </P>
 
 <h4><a href="#T2">&#9679; Structural Design Pattern</a></h4>
-<P>  
-&nbsp;&nbsp;6. Adapter Pattern <br>
-&nbsp;&nbsp;7. Bridge Pattern <br>
-&nbsp;&nbsp;8. Composite Pattern <br>
-&nbsp;&nbsp;9. Decorator Pattern <br>
-10. Facade Pattern <br>
-11. Flyweight Pattern <br>
-12. Proxy Pattern <br>
+<P>
+
+<a href="#C6">&nbsp;&nbsp;6. Adapter Pattern </a><br>
+<a href="#C7">&nbsp;&nbsp;7. Bridge Pattern </a><br>
+<a href="#C8">&nbsp;&nbsp;8. Composite Pattern </a><br>
+<a href="#C9">&nbsp;&nbsp;9. Decorator Pattern </a><br>
+<a href="#C10">10. Facade Pattern </a><br>
+<a href="#C11">11. Flyweight Pattern </a><br>
+<a href="#C12">12. Proxy Pattern </a><br>
 </P>
 
 <h4><a href="#T3">&#9679; Behavioral Design Pattern</a></h4>
@@ -339,7 +340,7 @@ The builder pattern is used to create complex objects with constituent parts tha
  An external class controls the construction algorithm.
 </p>
 
-<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/builder.png?raw=true" alt="prototype" width="300" height="500"><br>
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/builder.png?raw=true" alt="builder" width="300" height="500"><br>
 
 <p>
 <b>Example</b><br>
@@ -445,7 +446,85 @@ The builder pattern is used to create complex objects with constituent parts tha
     showing dialog builder.Dialog@9660f4e
 
 <h3 id="T2">Structural Design Pattern</h3>
-<hr>
+<hr><p>
+Structural Patterns talk about objects and classes and how they combine. 
+This pattern creates a simple structure to indicate the relationship of objects and classes to each other.
+</p>
+
+<h4 id="C6"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/structural/adapter">Adapter Pattern</a></h4>
+<hr><p>
+The adapter pattern is used to provide a link between two otherwise incompatible types 
+by wrapping the "adapter" with a class that supports the interface required by the client.
+</p>
+
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/adapter.png?raw=true" alt="adapter" width="400" height="300"><br>
+
+<p>
+<b>Example</b><br>
+</p>
+    
+    data class BankDetails(var bankName: String, var accHolderName: String, var accNumber: Long)
+    
+    class BankCustomer() : CreditCard {
+        private lateinit var bankDetails: BankDetails
+    
+        override fun generateBankDetails(bankName: String, accHolderName: String, accNumber: Long) {
+            bankDetails = BankDetails(
+                bankName,
+                accHolderName,
+                accNumber
+            )
+        }
+    
+        override fun getCreditCard(): String {
+            return "The Account number ${bankDetails.accNumber} of ${bankDetails.accHolderName} " +
+                    "in ${bankDetails.bankName} bank is valid and authenticated for issuing the credit card."
+        }
+    }
+    
+<p>
+<b>Usage</b><br>
+</p>
+
+    val credit: CreditCard = BankCustomer()
+    credit.generateBankDetails("CG", "Jakode", 2024)
+    println(credit.getCreditCard())
+    
+<p>
+<b>Output</b><br>
+</p>
+    
+    The Account number 2024 of Jakode in CG bank is valid and authenticated for issuing the credit card.
+
+<h4 id="C7"><a href="">Bridge Pattern</a></h4>
+<hr><p>
+
+</p>
+
+<h4 id="C8"><a href="">Composite Pattern</a></h4>
+<hr><p>
+
+</p>
+
+<h4 id="C9"><a href="">Decorator Pattern</a></h4>
+<hr><p>
+
+</p>
+
+<h4 id="C10"><a href="">Facade Pattern</a></h4>
+<hr><p>
+
+</p>
+
+<h4 id="C11"><a href="">Flyweight Pattern</a></h4>
+<hr><p>
+
+</p>
+
+<h4 id="C12"><a href="">Proxy Pattern</a></h4>
+<hr><p>
+
+</p>
 
 <h3 id="T3">Behavioral Design Pattern</h3>
 <hr>
