@@ -470,7 +470,7 @@ by wrapping the "adapter" with a class that supports the interface required by t
         fun getCreditCard(): String
     }
     
-    class BankCustomer() : CreditCard {
+    class BankCustomer : CreditCard {
         private lateinit var bankDetails: BankDetails
     
         override fun generateBankDetails(bankName: String, accHolderName: String, accNumber: Long) {
@@ -501,11 +501,77 @@ by wrapping the "adapter" with a class that supports the interface required by t
     
     The Account number 2024 of Jakode in CG bank is valid and authenticated for issuing the credit card.
 
-<h4 id="C7"><a href="">Bridge Pattern</a></h4>
+<h4 id="C7"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/structural/bridge">Bridge Pattern</a></h4>
 <hr><p>
-
+When we need to make a distinction between abstraction and implementation, we use Bridge Pattern. 
+The reason for naming this pattern is that an interface is used as a bridge, which separates between abstraction and implementation.
 </p>
 
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/bridge.png?raw=true" alt="adapter" width="400" height="300"><br>
+
+<p>
+<b>Example</b><br>
+</p>
+
+    interface Color {
+        fun applyColor()
+    }
+    
+    abstract class Shape(protected var color: Color /*implementor*/) {
+        abstract fun applyColor()
+    }
+    
+    class RedColor :Color{
+        override fun applyColor() {
+            println("red.")
+        }
+    }
+    
+    class GreenColor : Color {
+        override fun applyColor() {
+            println("green.")
+        }
+    }
+    
+    class Circle(color: Color) : Shape(color) {
+        override fun applyColor() {
+            print("Circle filled with color ")
+            color.applyColor()
+        }
+    }
+    
+    class Triangle(color: Color) : Shape(color) {
+        override fun applyColor() {
+            print("Triangle filled with color ")
+            color.applyColor()
+        }
+    }
+    
+<p>
+<b>Usage</b><br>
+</p>
+
+    val redTriangle: Shape = Triangle(RedColor())
+    redTriangle.applyColor()
+    
+    val greenTriangle: Shape = Triangle(GreenColor())
+    greenTriangle.applyColor()
+    
+    val redCircle: Shape = Circle(RedColor())
+    redCircle.applyColor()
+    
+    val greenCircle: Shape = Circle(GreenColor())
+    greenCircle.applyColor()
+    
+<p>
+<b>Output</b><br>
+</p>
+
+    Triangle filled with color red.
+    Triangle filled with color green.
+    Circle filled with color red.
+    Circle filled with color green.
+    
 <h4 id="C8"><a href="">Composite Pattern</a></h4>
 <hr><p>
 

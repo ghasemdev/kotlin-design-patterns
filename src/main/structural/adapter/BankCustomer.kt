@@ -1,6 +1,6 @@
 package adapter
 
-class BankCustomer() : CreditCard {
+class BankCustomer : CreditCard {
     private lateinit var bankDetails: BankDetails
 
     override fun generateBankDetails(bankName: String, accHolderName: String, accNumber: Long) {
