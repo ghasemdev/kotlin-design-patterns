@@ -572,11 +572,74 @@ The reason for naming this pattern is that an interface is used as a bridge, whi
     Circle filled with color red.
     Circle filled with color green.
     
-<h4 id="C8"><a href="">Composite Pattern</a></h4>
+<h4 id="C8"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/structural/composite">Composite Pattern</a></h4>
 <hr><p>
-
+The Composite pattern helps us to have objects hierarchically, 
+or in other words, a tree structure.
 </p>
 
+<img src="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/blob/master/uml/composite.png?raw=true" alt="adapter" width="400" height="300"><br>
+
+<p>
+<b>Example</b><br>
+</p>
+
+    interface Employee {
+        fun showEmployeeDetails()
+    }
+    
+    class Developer(var name: String, var employeeId: Long, var position: String) : Employee {
+        override fun showEmployeeDetails() {
+            println("$employeeId $name")
+        }
+    }
+    
+    class Manager(var name: String, var employeeId: Long, var position: String) : Employee {
+        override fun showEmployeeDetails() {
+            println("$employeeId $name")
+        }
+    }
+    
+    class Company : Employee {
+        private val employeeList: MutableList<Employee> = ArrayList()
+    
+        override fun showEmployeeDetails() {
+            employeeList.forEach { it.showEmployeeDetails() }
+        }
+    
+        fun addEmployee(employee: Employee) {
+            employeeList.add(employee)
+        }
+    
+        fun removeEmployee(employee: Employee) {
+            employeeList.remove(employee)
+        }
+    }
+    
+<p>
+<b>Usage</b><br>
+</p>
+
+    val engDirectory = Company()
+    val developer = Developer("jack", 100, "Developer")
+    engDirectory.addEmployee(developer)
+    
+    val accDirectory = Company()
+    val manager = Manager("elias", 200, "Sr Manager")
+    accDirectory.addEmployee(manager)
+    
+    val directory = Company()
+    directory.addEmployee(engDirectory)
+    directory.addEmployee(accDirectory)
+    directory.showEmployeeDetails()
+    
+<p>
+<b>Output</b><br>
+</p>
+
+    100 jack
+    200 elias
+    
 <h4 id="C9"><a href="">Decorator Pattern</a></h4>
 <hr><p>
 
