@@ -1,5 +1,7 @@
 # Kotlin Design Patterns
 
+![design patterns](https://res.cloudinary.com/practicaldev/image/fetch/s--f1-MZPls--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vvse11o7g3zewjjvu67j.jpeg)
+
 ## What is Design Patterns ?
 
 ***
