@@ -1,7 +1,7 @@
 package singleton
 
 object Logger {
-    
+
     init {
         println("$this I was accessed for the first time")
     }
