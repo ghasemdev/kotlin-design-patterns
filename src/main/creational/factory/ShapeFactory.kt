@@ -1,9 +1,9 @@
 package factory
 
-import abstractfactory.shapes.Circle
-import abstractfactory.shapes.Rectangle
-import abstractfactory.shapes.Shape
-import abstractfactory.shapes.Square
+import factory.shapes.Circle
+import factory.shapes.Rectangle
+import factory.shapes.Shape
+import factory.shapes.Square
 
 object ShapeFactory { // Factory create shapes
     enum class ShapeType {

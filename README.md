@@ -1,5 +1,7 @@
-# Design-Patterns-In-Kotlin
+# Kotlin Design Patterns
+
 ### What is Design Patterns ?
+
 <hr><p>
 Design Patterns are a proven way to solve common programming problems. 
 These issues or questions will usually arise during the software development period for programmers. 
@@ -7,6 +9,7 @@ Pattern design solutions are usually using object-oriented.
 </p>
 
 ### Advantage of design pattern
+
 <hr><p>
 1. They are reusable in multiple projects. <br>
 2. They provide the solutions that help to define the system architecture. <br>
@@ -15,7 +18,8 @@ Pattern design solutions are usually using object-oriented.
 5. They are well-proved and testified solutions since they have been built upon the knowledge and experience of expert software developers.
 </p>
 
-### Type of design pattern 
+### Type of design pattern
+
 <hr>
 
 <h4><a href="#T1">&#9679; Creational Design Pattern</a></h4>
@@ -63,7 +67,8 @@ But for many it may be very easy to build an object and just by new we create an
 But hard code is not a good solution Because we sometimes change the identity of a class in our code, and in such cases we have to use the Creational Design pattern.
 </p>
 
-<h4 id="C1"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/factory">Factory Pattern</a></h4>
+<h4 id="C1"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/factory">
+Factory Pattern</a></h4>
 <hr><p>
 The factory pattern is used to replace class constructors, 
 abstracting the process of object generation so that the type of the object instantiated can be determined at run-time.
@@ -132,8 +137,9 @@ we can also use sealed class :)
     Shape : Circle
     Shape : Rectangle
     Shape : Square
-    
-<h4 id="C2"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/abstractfactory">Abstract Factory Pattern</a></h4>
+
+<h4 id="C2"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/abstract_factory">
+Abstract Factory Pattern</a></h4>
 <hr><p>
 The abstract factory pattern is used to provide a client with a set of related or dependant objects. 
 The "family" of objects created by the factory are determined at run-time.    
@@ -249,7 +255,7 @@ The "family" of objects created by the factory are determined at run-time.
     factory = AbstractFactory.createFactory<ShapeFactory>()
     val circle = factory.getShape(ShapeFactory.ShapeType.CIRCLE)!!
     println(circle.draw()) 
-    
+
 <p>
 <b>Output</b><br>
 </p>
@@ -257,7 +263,8 @@ The "family" of objects created by the factory are determined at run-time.
     Color : Blue
     Shape : Circle
 
-<h4 id="C3"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/singleton">Singleton Pattern</a></h4>
+<h4 id="C3"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/singleton">
+Singleton Pattern</a></h4>
 <hr><p>
 The singleton pattern ensures that only one object of a particular class is ever created. 
 All further references to objects of the singleton class refer to the same underlying instance.
@@ -274,14 +281,14 @@ All further references to objects of the singleton class refer to the same under
     
         fun open() = "Open data base : $this"
     }
-    
+
 <p>
 <b>Usage</b><br>
 </p>
 
     DataBase.open()
     DataBase.open()
-    
+
 <p>
 <b>Output</b><br>
 </p>
@@ -290,7 +297,8 @@ All further references to objects of the singleton class refer to the same under
     Open data base : singleton.DataBase@3a5ed7a6
     Open data base : singleton.DataBase@3a5ed7a6
 
-<h4 id="C4"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/prototype">Prototype Pattern</a></h4>
+<h4 id="C4"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/prototype">
+Prototype Pattern</a></h4>
 <hr><p>
 The purpose of a pattern prototype is that we do not create different objects of the same class, 
 simplify an object we have, and do not pay to build a new object. 
@@ -317,7 +325,7 @@ we can also implements Cloneable class or use <code>my_object.copy()</code> in K
             return EmployeeRecord(id, name, designation, salary, address)
         }
     }
-    
+
 <p>
 <b>Usage</b><br>
 </p>
@@ -326,7 +334,7 @@ we can also implements Cloneable class or use <code>my_object.copy()</code> in K
     println(e1)
     val e2 = e1.getClone()
     println(e2)
-    
+
 <p>
 <b>Output</b><br>
 </p>
@@ -334,7 +342,8 @@ we can also implements Cloneable class or use <code>my_object.copy()</code> in K
     EmployeeRecord(id=7072, name=jack, designation=software engineer, salary=1000.0, address=Tehran Iran)
     EmployeeRecord(id=7072, name=jack, designation=software engineer, salary=1000.0, address=Tehran Iran)
 
-<h4 id="C5"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/builder">Builder Pattern</a></h4>
+<h4 id="C5"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/creational/builder">
+Builder Pattern</a></h4>
 <hr><p>
 The builder pattern is used to create complex objects with constituent parts that must be created in the same order or using a specific algorithm.
  An external class controls the construction algorithm.
@@ -412,7 +421,7 @@ The builder pattern is used to create complex objects with constituent parts tha
             }
         }
     }
-    
+
 <p>
 <b>Usage</b><br>
 </p>
@@ -431,7 +440,7 @@ The builder pattern is used to create complex objects with constituent parts tha
     }.build()
     
     dialog.show()
-    
+
 <p>
 <b>Output</b><br>
 </p>
@@ -451,7 +460,8 @@ Structural Patterns talk about objects and classes and how they combine.
 This pattern creates a simple structure to indicate the relationship of objects and classes to each other.
 </p>
 
-<h4 id="C6"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/structural/adapter">Adapter Pattern</a></h4>
+<h4 id="C6"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/structural/adapter">
+Adapter Pattern</a></h4>
 <hr><p>
 The adapter pattern is used to provide a link between two otherwise incompatible types 
 by wrapping the "adapter" with a class that supports the interface required by the client.
@@ -462,7 +472,7 @@ by wrapping the "adapter" with a class that supports the interface required by t
 <p>
 <b>Example</b><br>
 </p>
-    
+
     data class BankDetails(var bankName: String, var accHolderName: String, var accNumber: Long)
     
     interface CreditCard {
@@ -486,7 +496,7 @@ by wrapping the "adapter" with a class that supports the interface required by t
                     "in ${bankDetails.bankName} bank is valid and authenticated for issuing the credit card."
         }
     }
-    
+
 <p>
 <b>Usage</b><br>
 </p>
@@ -494,14 +504,15 @@ by wrapping the "adapter" with a class that supports the interface required by t
     val credit: CreditCard = BankCustomer()
     credit.generateBankDetails("CG", "Jakode", 2024)
     println(credit.getCreditCard())
-    
+
 <p>
 <b>Output</b><br>
 </p>
-    
+
     The Account number 2024 of Jakode in CG bank is valid and authenticated for issuing the credit card.
 
-<h4 id="C7"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/structural/bridge">Bridge Pattern</a></h4>
+<h4 id="C7"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/structural/bridge">
+Bridge Pattern</a></h4>
 <hr><p>
 When we need to make a distinction between abstraction and implementation, we use Bridge Pattern. 
 The reason for naming this pattern is that an interface is used as a bridge, which separates between abstraction and implementation.
@@ -546,7 +557,7 @@ The reason for naming this pattern is that an interface is used as a bridge, whi
             color.applyColor()
         }
     }
-    
+
 <p>
 <b>Usage</b><br>
 </p>
@@ -562,7 +573,7 @@ The reason for naming this pattern is that an interface is used as a bridge, whi
     
     val greenCircle: Shape = Circle(GreenColor())
     greenCircle.applyColor()
-    
+
 <p>
 <b>Output</b><br>
 </p>
@@ -571,8 +582,9 @@ The reason for naming this pattern is that an interface is used as a bridge, whi
     Triangle filled with color green.
     Circle filled with color red.
     Circle filled with color green.
-    
-<h4 id="C8"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/structural/composite">Composite Pattern</a></h4>
+
+<h4 id="C8"><a href="https://github.com/ghasem-79/Design-Patterns-In-Kotlin/tree/master/src/main/structural/composite">
+Composite Pattern</a></h4>
 <hr><p>
 The Composite pattern helps us to have objects hierarchically, 
 or in other words, a tree structure.
@@ -615,7 +627,7 @@ or in other words, a tree structure.
             employeeList.remove(employee)
         }
     }
-    
+
 <p>
 <b>Usage</b><br>
 </p>
@@ -632,14 +644,14 @@ or in other words, a tree structure.
     directory.addEmployee(engDirectory)
     directory.addEmployee(accDirectory)
     directory.showEmployeeDetails()
-    
+
 <p>
 <b>Output</b><br>
 </p>
 
     100 jack
     200 elias
-    
+
 <h4 id="C9"><a href="">Decorator Pattern</a></h4>
 <hr><p>
 
