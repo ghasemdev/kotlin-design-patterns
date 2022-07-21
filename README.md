@@ -98,45 +98,38 @@ singleton.Logger@12f41634 massage = Hello Kotlin
 
 [The factory pattern](src/main/creational/factory) is used to replace class constructors,
 abstracting the process of object generation so that the type of the object instantiated can be determined at run-time.
-we can also use sealed class :)
+we can also use sealed class.
 
 ![factory](uml/factory.png)
 
 **Example**
 
 ```kotlin
-interface Shape {
-    fun draw(): String
+interface ChessPiece {
+    val file: Char
+    val rank: Char
 }
 
-class Circle : Shape {
-    override fun draw(): String {
-        return "Shape : Circle"
-    }
-}
+data class Pawn(
+    override val file: Char,
+    override val rank: Char
+) : ChessPiece
 
-class Rectangle : Shape {
-    override fun draw(): String {
-        return "Shape : Rectangle"
-    }
-}
+data class Queen(
+    override val file: Char,
+    override val rank: Char
+) : ChessPiece
 
-class Square : Shape {
-    override fun draw(): String {
-        return "Shape : Square"
-    }
-}
+class UnknownPiece(message: String) : RuntimeException(message)
 
-object ShapeFactory { // Factory create shapes
-    enum class ShapeType {
-        CIRCLE, RECTANGLE, SQUARE
-    }
+object ChessFactory { // Factory create chess piece
 
-    fun createShape(type: ShapeType): Shape {
+    fun createPiece(notation: String): ChessPiece {
+        val (type, file, rank) = notation.toCharArray()
         return when (type) {
-            ShapeType.CIRCLE -> Circle()
-            ShapeType.RECTANGLE -> Rectangle()
-            ShapeType.SQUARE -> Square()
+            'p' -> Pawn(file, rank)
+            'q' -> Queen(file, rank)
+            else -> throw UnknownPiece(type.toString())
         }
     }
 }
@@ -145,22 +138,18 @@ object ShapeFactory { // Factory create shapes
 **Usage**
 
 ```kotlin
-val circle = ShapeFactory.createShape(ShapeFactory.ShapeType.CIRCLE)
-println(circle.draw())
-
-val rectangle = ShapeFactory.createShape(ShapeFactory.ShapeType.RECTANGLE)
-println(rectangle.draw())
-
-val square = ShapeFactory.createShape(ShapeFactory.ShapeType.SQUARE)
-println(square.draw())
+val notations = listOf("pa8", "qc3")
+val pieces = mutableListOf<ChessPiece>()
+for (n in notations) {
+    pieces.add(ChessFactory.createPiece(n))
+}
+println(pieces)
 ```
 
 **Output**
 
 ```
-Shape : Circle
-Shape : Rectangle
-Shape : Square
+[Pawn(file=a, rank=8), Queen(file=c, rank=3)]
 ```
 
 ## Abstract Factory Pattern
