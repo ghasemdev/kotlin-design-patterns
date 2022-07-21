@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/kotlin-design-patterns.iml" filepath="$PROJECT_DIR$/kotlin-design-patterns.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kotlin-design-patterns.iml"
+              filepath="$PROJECT_DIR$/kotlin-design-patterns.iml"/>
     </modules>
   </component>
 </project>
