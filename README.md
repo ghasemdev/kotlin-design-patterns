@@ -4,14 +4,11 @@
 
 ## What is Design Patterns ?
 
-***
 Design Patterns are a proven way to solve common programming problems.
 These issues or questions will usually arise during the software development period for programmers.
 Pattern design solutions are typically using object-oriented.
 
 ## Advantage of design pattern
-
-***
 
 1. They are reusable in multiple projects.
 2. They provide the solutions that help to define the system architecture.
@@ -21,8 +18,6 @@ Pattern design solutions are typically using object-oriented.
    software developers.
 
 ## Type of design pattern
-
-***
 
 ### [Creational Design Pattern](#creational-design-pattern-1)
 
@@ -58,7 +53,6 @@ Pattern design solutions are typically using object-oriented.
 
 # Creational Design Pattern
 
-***
 One of the sub-branches of Pattern Design is Creational Design Pattern. This pattern is a way to make things.
 This template is used when we want to create an object from a class in our program.
 But for many it may be very easy to build an object and just by new we create an object.
@@ -67,7 +61,6 @@ we have to use the Creational Design pattern.
 
 ## Singleton Pattern
 
-***
 [The singleton pattern](src/main/creational/singleton) ensures that only one object of a particular class is ever
 created. All further references to object of the singleton class refer to the same underlying instance.
 
@@ -103,7 +96,6 @@ singleton.Logger@12f41634 massage = Hello Kotlin
 
 ## Factory Pattern
 
-***
 [The factory pattern](src/main/creational/factory) is used to replace class constructors,
 abstracting the process of object generation so that the type of the object instantiated can be determined at run-time.
 we can also use sealed class :)
@@ -173,7 +165,6 @@ Shape : Square
 
 ## Abstract Factory Pattern
 
-***
 [The abstract factory pattern](src/main/creational/abstract_factory) is used to provide a client with a set of related
 or dependant objects. The "family" of objects created by the factory are determined at run-time.
 
@@ -297,7 +288,6 @@ Shape : Circle
 
 ## Prototype Pattern
 
-***
 The purpose of a [pattern prototype](src/main/creational/prototype) is that we do not create different objects of the
 same class, simplify an object we have, and do not pay to build a new object.
 we can also implement Cloneable class or use `my_object.copy()` in Kotlin.
@@ -341,7 +331,6 @@ EmployeeRecord(id = 7072, name = jack, designation = software engineer, salary =
 
 ## Builder Pattern
 
-***
 [The builder pattern](src/main/creational/builder) is used to create complex objects with constituent parts that must be
 created in the same order or using a specific algorithm. An external class controls the construction algorithm.
 
@@ -453,13 +442,11 @@ showing dialog builder.Dialog@9660f4e
 
 # Structural Design Pattern
 
-***
 Structural Patterns talk about objects and classes and how they combine.
 This pattern creates a simple structure to indicate the relationship of objects and classes to each other.
 
 ## Adapter Pattern
 
-***
 [The adapter pattern](src/main/structural/adapter) is used to provide a link between two otherwise incompatible types
 by wrapping the "adapter" with a class that supports the interface required by the client.
 
@@ -509,7 +496,6 @@ The Account number 2024 of Jakode in CG bank is valid and authenticated for issu
 
 ## Bridge Pattern
 
-***
 When we need to make a distinction between abstraction and implementation, we
 use [Bridge Pattern](src/main/structural/bridge). The reason for naming this pattern is that an interface is used as a
 bridge, which separates between abstraction and implementation.
@@ -581,7 +567,6 @@ Circle filled with color green.
 
 ## Composite Pattern
 
-***
 [The Composite pattern](src/main/structural/composite) helps us to have objects hierarchically,
 or in other words, a tree structure.
 
@@ -649,64 +634,32 @@ directory.showEmployeeDetails()
 
 ## Decorator Pattern
 
-***
-
 ## Facade Pattern
-
-***
 
 ## Flyweight Pattern
 
-***
-
 ## Proxy Pattern
-
-***
 
 # Behavioral Design Pattern
 
-***
-
 ## Chain Of Responsibility Pattern
-
-***
 
 ## Command Pattern
 
-***
-
 ## Interpreter Pattern
-
-***
 
 ## Iterator Pattern
 
-***
-
 ## Mediator Pattern
-
-***
 
 ## Memento Pattern
 
-***
-
 ## Observer Pattern
-
-***
 
 ## State Pattern
 
-***
-
 ## Strategy Pattern
-
-***
 
 ## Template Pattern
 
-***
-
 ## Visitor Pattern
-
-***
