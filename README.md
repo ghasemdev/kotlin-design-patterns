@@ -22,37 +22,37 @@ Pattern design solutions are typically using object-oriented.
 
 ***
 
-### [Creational Design Pattern](#Creational Design Pattern)
+### [Creational Design Pattern](#creational-design-pattern)
 
-1. [Singleton Pattern](#Singleton Pattern)
-2. [Factory Pattern](#Factory Pattern)
-3. [Abstract Factory Pattern](#Abstract Factory Pattern)
-4. [Prototype Pattern](#Prototype Pattern)
-5. [Builder Pattern](#Builder Pattern)
+1. [Singleton Pattern](#singleton-pattern)
+2. [Factory Pattern](#factory-pattern)
+3. [Abstract Factory Pattern](#abstract-factory-pattern)
+4. [Prototype Pattern](#prototype-pattern)
+5. [Builder Pattern](#builder-pattern)
 
-### [Structural Design Pattern](#Structural Design Pattern)
+### [Structural Design Pattern](#structural-design-pattern)
 
-6. [Adapter Pattern](#Adapter Pattern)
-7. [Bridge Pattern](#Bridge Pattern)
-8. [Composite Pattern](#Composite Pattern)
-9. [Decorator Pattern](#Decorator Pattern)
-10. [Facade Pattern](#Facade Pattern)
-11. [Flyweight Pattern](#Flyweight Pattern)
-12. [Proxy Pattern](#Proxy Pattern)
+6. [Adapter Pattern](#adapter-pattern)
+7. [Bridge Pattern](#bridge-pattern)
+8. [Composite Pattern](#composite-pattern)
+9. [Decorator Pattern](#decorator-pattern)
+10. [Facade Pattern](#facade-pattern)
+11. [Flyweight Pattern](#flyweight-pattern)
+12. [Proxy Pattern](#proxy-pattern)
 
-### [Behavioral Design Pattern](#Behavioral Design Pattern)
+### [Behavioral Design Pattern](#behavioral-design-pattern)
 
-13. [Chain Of Responsibility Pattern](#Chain Of Responsibility Pattern)
-14. [Command Pattern](#Command Pattern)
-15. [Interpreter Pattern](#Interpreter Pattern)
-16. [Iterator Pattern](#Iterator Pattern)
-17. [Mediator Pattern](#Mediator Pattern)
-18. [Memento Pattern](#Memento Pattern)
-19. [Observer Pattern](#Observer Pattern)
-20. [State Pattern](#State Pattern)
-21. [Strategy Pattern](#Strategy Pattern)
-22. [Template Pattern](#Template Pattern)
-23. [Visitor Pattern](#Visitor Pattern)
+13. [Chain Of Responsibility Pattern](#chain-of-responsibility-pattern)
+14. [Command Pattern](#command-pattern)
+15. [Interpreter Pattern](#interpreter-pattern)
+16. [Iterator Pattern](#iterator-pattern)
+17. [Mediator Pattern](#mediator-pattern)
+18. [Memento Pattern](#memento-pattern)
+19. [Observer Pattern](#observer-pattern)
+20. [State Pattern](#state-pattern)
+21. [Strategy Pattern](#strategy-pattern)
+22. [Template Pattern](#template-pattern)
+23. [Visitor Pattern](#visitor-pattern)
 
 # Creational Design Pattern
 
@@ -75,6 +75,7 @@ created. All further references to object of the singleton class refer to the sa
 
 ```kotlin
 object Logger {
+
     init {
         println("$this I was accessed for the first time")
     }
