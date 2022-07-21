@@ -19,7 +19,7 @@ Pattern design solutions are typically using object-oriented.
 
 ## Type of design pattern
 
-### [Creational Design Pattern](#creational-design-pattern-1)
+### [Creational Design Pattern](https://github.com/ghasemdev/kotlin-design-patterns#creational-design-pattern-1)
 
 1. [Singleton Pattern](#singleton-pattern)
 2. [Factory Pattern](#factory-pattern)
@@ -27,7 +27,7 @@ Pattern design solutions are typically using object-oriented.
 4. [Prototype Pattern](#prototype-pattern)
 5. [Builder Pattern](#builder-pattern)
 
-### [Structural Design Pattern](#structural-design-pattern-1)
+### [Structural Design Pattern](https://github.com/ghasemdev/kotlin-design-patterns#structural-design-pattern-1)
 
 6. [Adapter Pattern](#adapter-pattern)
 7. [Bridge Pattern](#bridge-pattern)
@@ -37,7 +37,7 @@ Pattern design solutions are typically using object-oriented.
 11. [Flyweight Pattern](#flyweight-pattern)
 12. [Proxy Pattern](#proxy-pattern)
 
-### [Behavioral Design Pattern](#behavioral-design-pattern-1)
+### [Behavioral Design Pattern](https://github.com/ghasemdev/kotlin-design-patterns#behavioral-design-pattern-1)
 
 13. [Chain Of Responsibility Pattern](#chain-of-responsibility-pattern)
 14. [Command Pattern](#command-pattern)
