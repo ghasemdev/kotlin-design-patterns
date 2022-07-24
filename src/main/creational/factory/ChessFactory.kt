@@ -1,7 +1,6 @@
 package factory
 
 object ChessFactory {
-
     fun createPiece(notation: String): ChessPiece {
         val (type, file, rank) = notation.toCharArray()
         return when (type) {

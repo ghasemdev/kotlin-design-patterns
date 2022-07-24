@@ -1,0 +1,3 @@
+package abstractfactory
+
+typealias UnknownPropertyException = RuntimeException

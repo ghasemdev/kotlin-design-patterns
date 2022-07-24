@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class ChessFactoryTest {
-
     @Test
     fun factory() {
         val notations = listOf("pa8", "qc3")
