@@ -24,8 +24,8 @@ Pattern design solutions are typically using object-oriented.
 1. [Singleton Pattern](#singleton-pattern)
 2. [Factory Pattern](#factory-pattern)
 3. [Abstract Factory Pattern](#abstract-factory-pattern)
-4. [Prototype Pattern](#prototype-pattern)
-5. [Builder Pattern](#builder-pattern)
+4. [Builder Pattern](#builder-pattern)
+5. [Prototype Pattern](#prototype-pattern)
 
 ### [Structural Design Pattern](https://github.com/ghasemdev/kotlin-design-patterns#structural-design-pattern-1)
 
@@ -258,6 +258,91 @@ ServerConfigurationImpl(properties=[IntProperty(name=port, value=8080), StringPr
 ServerConfigurationImpl(properties=[IntProperty(name=port, value=8080), StringProperty(name=environment, value=production)])
 ```
 
+## Builder Pattern
+
+[The builder pattern](src/main/creational/builder) is used to create complex objects with constituent parts that must be
+created in the same order or using a specific algorithm. An external class controls the construction algorithm.
+
+![builder](uml/builder.png)
+
+**Example**
+
+```kotlin
+data class Mail(
+    val to: List<String>,
+    val cc: List<String>? = null,
+    val title: String? = null,
+    val message: String? = null,
+    val important: Boolean = false
+) {
+    fun send() = println("Mail Sent")
+
+    class Builder(initializer: Builder.() -> Unit = {}) {
+        private var to: List<String> = listOf()
+        private var cc: List<String>? = null
+        private var title: String? = null
+        private var message: String? = null
+        private var important: Boolean = false
+
+        init {
+            initializer()
+        }
+
+        fun to(to: List<String>) = apply { this.to = to }
+        fun cc(cc: List<String>) = apply { this.cc = cc }
+        fun title(title: String) = apply { this.title = title }
+        fun message(message: String) = apply { this.message = message }
+        fun important(important: Boolean) = apply { this.important = important }
+
+        fun build(): Mail {
+            require(to.isNotEmpty()) { "To property is empty" }
+            return Mail(to, cc, title, message, important)
+        }
+    }
+}
+
+fun mail(initializer: Mail.Builder.() -> Unit) = Mail.Builder(initializer).build()
+```
+
+**Usage**
+
+```kotlin
+val mail = Mail(to = listOf("mail@gmail.com"), title = "What's up?")
+println(mail)
+mail.send()
+
+val mailFromBuilder = Mail.Builder()
+    .to(listOf("mailFromBuilder@gmail.com"))
+    .message("Hi")
+    .build()
+println(mailFromBuilder)
+
+val mailFromDSLBuilder = Mail.Builder {
+    to(listOf("mailFromDSLBuilder@gmail.com"))
+    message("Hi")
+}.build()
+println(mailFromDSLBuilder)
+
+val mailFromExt = mail {
+    to(listOf("mailFromExt@gmail.com"))
+    cc(listOf())
+    title("???")
+    message("Hi")
+    important(true)
+}
+println(mailFromExt)
+```
+
+**Output**
+
+```
+Mail(to=[mail@gmail.com], cc=null, title=What's up?, message=null, important=false)
+Mail Sent
+Mail(to=[mailFromBuilder@gmail.com], cc=null, title=null, message=Hi, important=false)
+Mail(to=[mailFromDSLBuilder@gmail.com], cc=null, title=null, message=Hi, important=false)
+Mail(to=[mailFromExt@gmail.com], cc=[], title=???, message=Hi, important=true)
+```
+
 ## Prototype Pattern
 
 The purpose of a [pattern prototype](src/main/creational/prototype) is that we do not create different objects of the
@@ -299,117 +384,6 @@ println(e2)
 ```
 EmployeeRecord(id = 7072, name = jack, designation = software engineer, salary = 1000.0, address = Tehran Iran)
 EmployeeRecord(id = 7072, name = jack, designation = software engineer, salary = 1000.0, address = Tehran Iran)
-```
-
-## Builder Pattern
-
-[The builder pattern](src/main/creational/builder) is used to create complex objects with constituent parts that must be
-created in the same order or using a specific algorithm. An external class controls the construction algorithm.
-
-![builder](uml/builder.png)
-
-**Example**
-
-```kotlin
-class Dialog {
-
-    fun showTitle() = println("showing title")
-
-    fun setTitle(text: String) = println("setting title text $text")
-
-    fun setTitleColor(color: Color) = println("setting title color ${colorToHex(color)}")
-
-    fun showMessage() = println("showing message")
-
-    fun setMessage(text: String) = println("setting message $text")
-
-    fun setMessageColor(color: Color) = println("setting message color ${colorToHex(color)}")
-
-    fun showImage(bitmapBytes: ByteArray) = println("showing image with size ${bitmapBytes.size}")
-
-    fun show() = println("showing dialog $this")
-
-    private fun colorToHex(color: Color) = String.format("#%02x%02x%02x", color.red, color.green, color.blue)
-
-    class Builder(initialize: Builder.() -> Unit) {
-        init {
-            initialize()
-        }
-
-        private var titleHolder: TextView? = null
-        private var messageHolder: TextView? = null
-        private var imageHolder: File? = null
-
-        fun title(initialize: TextView.() -> Unit) {
-            titleHolder = TextView().apply { initialize() }
-        }
-
-        fun message(initialize: TextView.() -> Unit) {
-            messageHolder = TextView().apply { initialize() }
-        }
-
-        fun image(initialize: () -> File) {
-            imageHolder = initialize()
-        }
-
-        fun build(): Dialog {
-            return Dialog().apply {
-                titleHolder?.apply {
-                    setTitle(text)
-                    setTitleColor(color)
-                    showTitle()
-                }
-
-                messageHolder?.apply {
-                    setMessage(text)
-                    setMessageColor(color)
-                    showMessage()
-                }
-
-                imageHolder?.apply {
-                    showImage(readBytes())
-                }
-            }
-        }
-
-        class TextView {
-            var text: String = ""
-            var color: Color = Color.BLACK
-        }
-    }
-}
-```
-
-**Usage**
-
-```kotlin
-val dialog = Dialog.Builder {
-    title {
-        text = "Dialog Title"
-    }
-    message {
-        text = "Dialog Message"
-        color = Color.RED
-    }
-    image {
-        File.createTempFile("image", "jpg")
-    }
-}.build()
-
-dialog.show()
-```
-
-**Output**
-
-```
-setting title text Dialog Title
-setting title color #000000
-showing title
-setting message Dialog Message
-setting message color #ff0000
-showing message
-showing image with size 0
-showing dialog builder.Dialog@9660f4e
 ```
 
 # Structural Design Pattern
