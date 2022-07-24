@@ -354,36 +354,46 @@ we can also implement Cloneable class or use `my_object.copy()` in Kotlin.
 **Example**
 
 ```kotlin
-interface Prototype {
-    fun getClone(): Prototype
+enum class Role {
+    ADMIN,
+    SUPER_ADMIN,
+    REGULAR_USER
 }
 
-data class EmployeeRecord(
-    var id: Long,
-    var name: String,
-    var designation: String, var salary: Double,
-    var address: String
-) : Prototype {
-    override fun getClone(): Prototype {
-        return EmployeeRecord(id, name, designation, salary, address)
-    }
+data class User(
+    val name: String,
+    val role: Role,
+    private val permissions: Set<String>,
+    val tasks: List<String>,
+) {
+    fun hasPermission(permission: String) = permission in permissions
 }
 ```
 
 **Usage**
 
 ```kotlin
-val e1 = EmployeeRecord(7072, "jack", "software engineer", 1000.0, "Tehran Iran")
-println(e1)
-val e2 = e1.getClone()
-println(e2)
-```
+ // In real application this would be a database of users
+private val allUser = mutableListOf(
+    User(
+        name = "Ali",
+        role = Role.ADMIN,
+        permissions = setOf("edit", "delete"),
+        tasks = listOf("edit_users", "delete_users")
+    )
+)
 
-**Output**
+fun createUser(name: String, role: Role) {
+    for (user in allUser) {
+        if (user.role == role) {
+            allUser += user.copy(name = name)
+            return
+        }
+    }
+    // Handle case that no other user with such a role exists
+}
 
-```
-EmployeeRecord(id = 7072, name = jack, designation = software engineer, salary = 1000.0, address = Tehran Iran)
-EmployeeRecord(id = 7072, name = jack, designation = software engineer, salary = 1000.0, address = Tehran Iran)
+createUser(name = "Reza", role = Role.ADMIN)
 ```
 
 # Structural Design Pattern
