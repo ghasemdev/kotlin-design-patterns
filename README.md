@@ -70,7 +70,6 @@ created. All further references to object of the singleton class refer to the sa
 
 ```kotlin
 object Logger {
-
     init {
         println("$this I was accessed for the first time")
     }
@@ -123,7 +122,6 @@ data class Queen(
 class UnknownPiece(message: String) : RuntimeException(message)
 
 object ChessFactory { // Factory create chess piece
-
     fun createPiece(notation: String): ChessPiece {
         val (type, file, rank) = notation.toCharArray()
         return when (type) {
@@ -154,7 +152,7 @@ println(pieces)
 
 ## Abstract Factory Pattern
 
-[The abstract factory pattern](src/main/creational/abstract_factory) is used to provide a client with a set of related
+[The abstract factory pattern](src/main/creational/abstractfactory) is used to provide a client with a set of related
 or dependant objects. The "family" of objects created by the factory are determined at run-time.
 
 ![abstract factory](uml/abstract-factory.png)
@@ -162,117 +160,102 @@ or dependant objects. The "family" of objects created by the factory are determi
 **Example**
 
 ```kotlin
-interface Shape {
-    fun draw(): String
+interface Property {
+    val name: String
+    val value: Any
 }
 
-class Circle : Shape {
-    override fun draw(): String {
-        return "Shape : Circle"
-    }
+data class IntProperty(
+    override val name: String,
+    override val value: Int
+) : Property
+
+data class StringProperty(
+    override val name: String,
+    override val value: String
+) : Property
+
+interface ServerConfiguration {
+    val properties: List<Property>
 }
 
-class Rectangle : Shape {
-    override fun draw(): String {
-        return "Shape : Rectangle"
-    }
-}
+data class ServerConfigurationImpl(
+    override val properties: List<Property>
+) : ServerConfiguration
 
-class Square : Shape {
-    override fun draw(): String {
-        return "Shape : Square"
-    }
-}
+typealias UnknownPropertyException = RuntimeException
 
-interface Color {
-    fun fill(): String
-}
+abstract class Parser {
+    abstract fun from(file: File): ServerConfiguration
 
-class Blue : Color {
-    override fun fill(): String {
-        return "Color : Blue"
-    }
-}
+    private fun property(prop: String): Property {
+        val (name, value) = prop.split(":")
 
-class Green : Color {
-    override fun fill(): String {
-        return "Color : Green"
-    }
-}
-
-class Red : Color {
-    override fun fill(): String {
-        return "Color : Red"
-    }
-}
-
-class ShapeFactory : AbstractFactory() { // Factory create shapes
-    enum class ShapeType {
-        CIRCLE, RECTANGLE, SQUARE
-    }
-
-    override fun getColor(type: ColorFactory.ColorType): Color? {
-        return null
-    }
-
-    override fun getShape(type: ShapeType): Shape {
-        return when (type) {
-            ShapeType.CIRCLE -> Circle()
-            ShapeType.RECTANGLE -> Rectangle()
-            ShapeType.SQUARE -> Square()
-        }
-    }
-}
-
-class ColorFactory : AbstractFactory() { // Factory create color
-    enum class ColorType {
-        BLUE, GREEN, RED
-    }
-
-    override fun getColor(type: ColorType): Color {
-        return when (type) {
-            ColorType.BLUE -> Blue()
-            ColorType.GREEN -> Green()
-            ColorType.RED -> Red()
+        return when (name) {
+            "port" -> IntProperty(name, value.trim().toInt())
+            "environment" -> StringProperty(name, value.trim())
+            else -> throw UnknownPropertyException("Unknown property:$name")
         }
     }
 
-    override fun getShape(type: ShapeFactory.ShapeType): Shape? {
-        return null
+    protected fun server(propertyStrings: List<String>): ServerConfiguration {
+        val parsedProperties = mutableListOf<Property>()
+        for (p in propertyStrings) {
+            parsedProperties += property(p)
+        }
+        return ServerConfigurationImpl(parsedProperties)
     }
 }
 
-abstract class AbstractFactory {
-    abstract fun getColor(type: ColorFactory.ColorType): Color?
-    abstract fun getShape(type: ShapeFactory.ShapeType): Shape?
-
-    companion object {
-        inline fun <reified T : AbstractFactory> createFactory(): AbstractFactory = when (T::class) {
-            ShapeFactory::class -> ShapeFactory()
-            ColorFactory::class -> ColorFactory()
-            else -> throw IllegalArgumentException()
-        }
+object YamlParser : Parser() {
+    override fun from(file: File): ServerConfiguration {
+        val propertyStrings = file.readLines().drop(1).map { it.trim() }
+        return server(propertyStrings)
     }
+}
+
+object JsonParser : Parser() {
+    override fun from(file: File): ServerConfiguration {
+        val regex = """(\s|\{|}|"|,)*""".toRegex()
+        val lines = file.readLines()
+        val propertyStrings = lines.map { it.replace(regex, EMPTY) }.subList(2, lines.lastIndex - 1)
+        return server(propertyStrings)
+    }
+
+    private const val EMPTY = ""
 }
 ```
 
 **Usage**
 
-```kotlin
-var factory = AbstractFactory.createFactory<ColorFactory>()
-val blue = factory.getColor(ColorFactory.ColorType.BLUE)!!
-println(blue.fill())
+```yaml
+server:
+  port: 8080
+  environment: production
+```
 
-factory = AbstractFactory.createFactory<ShapeFactory>()
-val circle = factory.getShape(ShapeFactory.ShapeType.CIRCLE)!!
-println(circle.draw()) 
+```json
+{
+  "server": {
+    "port": 8080,
+    "environment": "production"
+  }
+}
+```
+
+```kotlin
+val ymlPath = "configure.yml"
+println(YamlParser.from(File(path)))
+
+val jsonPath = "configure.json"
+println(JsonParser.from(File(path)))
 ```
 
 **Output**
 
 ```
-Color : Blue
-Shape : Circle
+ServerConfigurationImpl(properties=[IntProperty(name=port, value=8080), StringProperty(name=environment, value=production)])
+ServerConfigurationImpl(properties=[IntProperty(name=port, value=8080), StringProperty(name=environment, value=production)])
 ```
 
 ## Prototype Pattern
