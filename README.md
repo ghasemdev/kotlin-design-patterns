@@ -29,10 +29,10 @@ Pattern design solutions are typically using object-oriented.
 
 ### [Structural Design Pattern](https://github.com/ghasemdev/kotlin-design-patterns#structural-design-pattern-1)
 
-6. [Adapter Pattern](#adapter-pattern)
-7. [Bridge Pattern](#bridge-pattern)
-8. [Composite Pattern](#composite-pattern)
-9. [Decorator Pattern](#decorator-pattern)
+6. [Decorator Pattern](#decorator-pattern)
+7. [Adapter Pattern](#adapter-pattern)
+8. [Bridge Pattern](#bridge-pattern)
+9. [Composite Pattern](#composite-pattern)
 10. [Facade Pattern](#facade-pattern)
 11. [Flyweight Pattern](#flyweight-pattern)
 12. [Proxy Pattern](#proxy-pattern)
@@ -401,6 +401,75 @@ createUser(name = "Reza", role = Role.ADMIN)
 Structural Patterns talk about objects and classes and how they combine.
 This pattern creates a simple structure to indicate the relationship of objects and classes to each other.
 
+## Decorator Pattern
+
+[The decorator pattern](src/main/structural/decorator) is used to extend or alter the functionality
+of objects at run-time by wrapping them in an object of a decorator class. This provides a flexible alternative to using
+inheritance to modify behaviour.
+
+![decorator](uml/decorator.png)
+
+**Example**
+
+```kotlin
+interface StarTrekRepository {
+    operator fun get(starShipName: String): String
+    operator fun set(starShipName: String, captainName: String)
+}
+
+class DefaultStarTrekRepository : StarTrekRepository {
+    private val starShipCaptains = mutableMapOf("USS Enterprise" to "Jean-Luc Picard")
+
+    override fun get(starShipName: String): String {
+        return starShipCaptains[starShipName] ?: "Unknown"
+    }
+
+    override fun set(starShipName: String, captainName: String) {
+        starShipCaptains[starShipName] = captainName
+    }
+}
+
+class LoggingGetCaptain(private val repository: StarTrekRepository) : StarTrekRepository by repository {
+    override fun get(starShipName: String): String {
+        println("Getting captain for $starShipName")
+        return repository[starShipName]
+    }
+}
+
+class ValidatingAdd(private val repository: StarTrekRepository) : StarTrekRepository by repository {
+    override fun set(starShipName: String, captainName: String) {
+        require(captainName.length < MAX_NAME_LENGTH) {
+            "$captainName is longer than $MAX_NAME_LENGTH characters!"
+        }
+        repository[starShipName] = captainName
+    }
+
+    companion object {
+        private const val MAX_NAME_LENGTH = 15
+    }
+}
+
+```
+
+**Usage**
+
+```kotlin
+val starTrekRepository = DefaultStarTrekRepository()
+val withValidating = ValidatingAdd(starTrekRepository)
+val withLoggingAndValidating = LoggingGetCaptain(withValidating)
+
+println(withLoggingAndValidating["USS Enterprise"])
+withLoggingAndValidating["USS Voyager"] = "Kathryn Janeway"
+```
+
+**Output**
+
+```
+Jean-Luc Picard
+java.lang.IllegalArgumentException: Kathryn Janeway is longer than 15 characters!
+...
+```
+
 ## Adapter Pattern
 
 [The adapter pattern](src/main/structural/adapter) is used to provide a link between two otherwise incompatible types
@@ -420,8 +489,8 @@ interface CreditCard {
 
 class BankCustomer : CreditCard {
     private lateinit var bankDetails: BankDetails
-
     override fun generateBankDetails(bankName: String, accHolderName: String, accNumber: Long) {
+
         bankDetails = BankDetails(
             bankName,
             accHolderName,
@@ -587,8 +656,6 @@ directory.showEmployeeDetails()
 100 jack
 200 elias
 ```
-
-## Decorator Pattern
 
 ## Facade Pattern
 
