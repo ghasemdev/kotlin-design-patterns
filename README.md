@@ -29,27 +29,27 @@ Pattern design solutions are typically using object-oriented.
 
 ### [Structural Design Pattern](https://github.com/ghasemdev/kotlin-design-patterns#structural-design-pattern-1)
 
-6. [Decorator Pattern](#decorator-pattern)
-7. [Adapter Pattern](#adapter-pattern)
-8. [Bridge Pattern](#bridge-pattern)
-9. [Composite Pattern](#composite-pattern)
-10. [Facade Pattern](#facade-pattern)
-11. [Flyweight Pattern](#flyweight-pattern)
-12. [Proxy Pattern](#proxy-pattern)
+1. [Decorator Pattern](#decorator-pattern)
+2. [Adapter Pattern](#adapter-pattern)
+3. [Bridge Pattern](#bridge-pattern)
+4. [Composite Pattern](#composite-pattern)
+5. [Facade Pattern](#facade-pattern)
+6. [Flyweight Pattern](#flyweight-pattern)
+7. [Proxy Pattern](#proxy-pattern)
 
 ### [Behavioral Design Pattern](https://github.com/ghasemdev/kotlin-design-patterns#behavioral-design-pattern-1)
 
-13. [Chain Of Responsibility Pattern](#chain-of-responsibility-pattern)
-14. [Command Pattern](#command-pattern)
-15. [Interpreter Pattern](#interpreter-pattern)
-16. [Iterator Pattern](#iterator-pattern)
-17. [Mediator Pattern](#mediator-pattern)
-18. [Memento Pattern](#memento-pattern)
-19. [Observer Pattern](#observer-pattern)
-20. [State Pattern](#state-pattern)
-21. [Strategy Pattern](#strategy-pattern)
-22. [Template Pattern](#template-pattern)
-23. [Visitor Pattern](#visitor-pattern)
+1. [Chain Of Responsibility Pattern](#chain-of-responsibility-pattern)
+2. [Command Pattern](#command-pattern)
+3. [Interpreter Pattern](#interpreter-pattern)
+4. [Iterator Pattern](#iterator-pattern)
+5. [Mediator Pattern](#mediator-pattern)
+6. [Memento Pattern](#memento-pattern)
+7. [Observer Pattern](#observer-pattern)
+8. [State Pattern](#state-pattern)
+9. [Strategy Pattern](#strategy-pattern)
+10. [Template Pattern](#template-pattern)
+11. [Visitor Pattern](#visitor-pattern)
 
 # Creational Design Pattern
 
@@ -480,27 +480,42 @@ by wrapping the "adapter" with a class that supports the interface required by t
 **Example**
 
 ```kotlin
-data class BankDetails(var bankName: String, var accHolderName: String, var accNumber: Long)
+interface USPlug { val hasPower: Int }
+interface EUPlug { val hasPower: String }
+interface UsbMini { val hasPower: Power }
+interface UsbTypeC { val hasPower: Boolean }
 
-interface CreditCard {
-    fun generateBankDetails(bankName: String, accHolderName: String, accNumber: Long)
-    fun getCreditCard(): String
+fun cellPhone(chargeCable: UsbTypeC): Boolean {
+    return if (chargeCable.hasPower) {
+        println("I've Got the Power!")
+        true
+    } else {
+        println("No Power")
+        false
+    }
 }
 
-class BankCustomer : CreditCard {
-    private lateinit var bankDetails: BankDetails
-    override fun generateBankDetails(bankName: String, accHolderName: String, accNumber: Long) {
+// Power outlet exposes USPlug interface
+fun usPowerOutlet() = object : USPlug {
+    override val hasPower: Int = 1
+}
 
-        bankDetails = BankDetails(
-            bankName,
-            accHolderName,
-            accNumber
-        )
+// Charger accepts EUPlug interface and exposes UsbMini interface
+fun charger(plug: EUPlug) = object : UsbMini {
+    override val hasPower: Power = Power.valueOf(plug.hasPower)
+}
+
+fun USPlug.toEUPlug(): EUPlug {
+    val hasPower = if (hasPower == 1) "TRUE" else "FALSE"
+    return object : EUPlug {
+        override val hasPower: String = hasPower
     }
+}
 
-    override fun getCreditCard(): String {
-        return "The Account number ${bankDetails.accNumber} of ${bankDetails.accHolderName} " +
-                "in ${bankDetails.bankName} bank is valid and authenticated for issuing the credit card."
+fun UsbMini.toUsbTypeC(): UsbTypeC {
+    val hasPower = this.hasPower == Power.TRUE
+    return object : UsbTypeC {
+        override val hasPower: Boolean = hasPower
     }
 }
 ```
@@ -508,15 +523,13 @@ class BankCustomer : CreditCard {
 **Usage**
 
 ```kotlin
-val credit: CreditCard = BankCustomer()
-credit.generateBankDetails("CG", "Jakode", 2024)
-println(credit.getCreditCard())
+cellPhone(charger(usPowerOutlet().toEUPlug()).toUsbTypeC())
 ```
 
 **Output**
 
 ```
-The Account number 2024 of Jakode in CG bank is valid and authenticated for issuing the credit card.
+I've Got the Power!
 ```
 
 ## Bridge Pattern
