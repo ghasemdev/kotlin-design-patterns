@@ -480,10 +480,25 @@ by wrapping the "adapter" with a class that supports the interface required by t
 **Example**
 
 ```kotlin
-interface USPlug { val hasPower: Int }
-interface EUPlug { val hasPower: String }
-interface UsbMini { val hasPower: Power }
-interface UsbTypeC { val hasPower: Boolean }
+interface USPlug { 
+    val hasPower: Int 
+}
+
+interface EUPlug { 
+    val hasPower: String 
+}
+
+interface UsbMini { 
+    val hasPower: Power 
+}
+
+interface UsbTypeC { 
+    val hasPower: Boolean 
+}
+
+enum class Power {
+    TRUE, FALSE
+}
 
 fun cellPhone(chargeCable: UsbTypeC): Boolean {
     return if (chargeCable.hasPower) {
